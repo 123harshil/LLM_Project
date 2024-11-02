@@ -7,8 +7,11 @@ This repository contains code to load embeddings, create Qdrant collections, and
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Ingesting Documents](#ingesting-documents)
-  - [Querying the Database](#querying-the-database)
+  - [Running the Ingestion Script](#running-the-ingestion-script)
+  - [Running the Query Script](#running-the-query-script)
+- [Files](#files)
+  - [ingest.py](#ingestpy)
+  - [app.py](#apppy)
 - [License](#license)
 
 ## Overview
@@ -47,54 +50,36 @@ This project demonstrates how to:
 4. **Place PDF Document**:
     - Place the PDF document (`DL.pdf`) in the `collections` directory inside your project folder.
 
-# Files
+## Files
 
-## 1. ingest.py
+### 1. ingest.py
 This script processes the PDF document and stores its embeddings in the Qdrant vector database.
 
-### Workflow
+#### Workflow
 - **Load the PDF Document**: Loaded using `PyPDFLoader` from LangChain.
 - **Text Splitting**: The document content is split into chunks (default: 1000 characters with 50 characters overlap) using `RecursiveCharacterTextSplitter`.
 - **Generate Embeddings**: Each text chunk is transformed into embeddings using the Hugging Face model (`BAAI/bge-large-en`).
 - **Store in Qdrant**: The embeddings are stored in a Qdrant collection (`gpt_db`).
 
-## 2. app.py
+### 2. app.py
 This script provides an interface to query the database and retrieve the most relevant document chunks based on semantic similarity.
 
-### Workflow
+#### Workflow
 - **Load Embeddings**: Initializes the Hugging Face embeddings model.
 - **Connect to Qdrant**: Establishes a connection with the Qdrant database.
 - **Search Query**: Executes a similarity search based on the input query (example: "What is saliency maps?") and retrieves the top 5 most relevant chunks.
 - **Display Results**: Prints each retrieved document chunk along with its similarity score and metadata.
 
-##Files
-###1. ingest.py
-This script processes the PDF document and stores its embeddings in the Qdrant vector database.
+## Usage
 
-###Workflow
-- **Load the PDF Document**: Loaded using PyPDFLoader from LangChain.
-- **Text Splitting**: The document content is split into chunks (default: 1000 characters with 50 characters overlap) using RecursiveCharacterTextSplitter.
-- **Generate Embeddings**: Each text chunk is transformed into embeddings using the Hugging Face model (BAAI/bge-large-en).
-- **Store in Qdrant**: The embeddings are stored in a Qdrant collection (gpt_db).
-
-###2. app.py
-This script provides an interface to query the database and retrieve the most relevant document chunks based on semantic similarity.
-
-###Workflow
-- **Load Embeddings**: Initializes the Hugging Face embeddings model.
-- **Connect to Qdrant**: Establishes a connection with the Qdrant database.
-- **Search Query**: Executes a similarity search based on the input query (example: "What is saliency maps?") and retrieves the top 5 most relevant chunks.
-- **Display Results**: Prints each retrieved document chunk along with its similarity score and metadata.
-
-##Usage
-
-###Running the Ingestion Script
+### Running the Ingestion Script
 To run the ingestion script:
-1. **Run the script**:
-    ```bash
-    python ingest.py
-    ```
-2. **Running the Query Script**:
+
+```bash
+python ingest.py
+```
+
+###Running the Query Script:
    To run the Query Script:
     ```bash
     python app.py
