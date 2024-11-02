@@ -22,3 +22,6 @@ To get started, follow these steps:
    ```bash
    git clone https://github.com/yourusername/LLM-Project.git
    cd LLM-Project
+2. **Install necessary packages**:Ensure that you have Python installed (preferably Python 3.8 or later).
+   '''bash
+   pip install langchain-community qdrant-client transformers pypdf
